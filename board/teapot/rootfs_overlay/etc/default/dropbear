@@ -1,0 +1,2 @@
+#Disable password authentication
+DROPBEAR_ARGS="-s"
