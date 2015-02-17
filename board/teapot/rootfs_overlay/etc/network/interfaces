@@ -1,0 +1,12 @@
+auto lo
+iface lo inet loopback
+
+auto wlan0
+iface wlan0 inet manual
+    wireless-essid RDN
+    pre-up wpa_supplicant -B w -D wext -i wlan0 -c /etc/wpa_supplicant.conf
+    # Without the -i, udhcpc attempts to get a lease from eth0
+    # -T1 speeds up lease acquisition
+    post-up udhcpc -i wlan0 -T 1
+    pre-down killall -q udhcpc
+    post-down killall -q wpa_supplicant
