@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# Initialize GPIO pins (LEDs)
+#
+
+. /etc/default/gpio
+
+case "$1" in
+  start)
+	for i in $OUTPUTS; do
+		echo $i > /sys/class/gpio/export
+		echo out > /sys/class/gpio/gpio$i/direction
+		echo 0 > /sys/class/gpio/gpio$i/value
+	done
+
+	for i in $INPUTS; do
+		echo $i > /sys/class/gpio/export
+		echo in > /sys/class/gpio/gpio$i/direction
+
+		#needed because there are built-in pull-up resistors, so we have to pull the pin to ground
+		echo 1 > /sys/class/gpio/gpio0/active_low
+	done
+
+	echo 1 > /sys/class/gpio/${GPIO_ERROR}/value
+        ;;
+  stop|restart|reload)
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?

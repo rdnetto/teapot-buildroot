@@ -1,0 +1,4 @@
+INPUTS="0"
+OUTPUTS="1 4"
+GPIO_ERROR="gpio1"
+

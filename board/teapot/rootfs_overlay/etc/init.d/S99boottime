@@ -1,10 +1,15 @@
 #!/bin/sh
 
+. /etc/default/gpio
+
 case "$1" in
   start)
         uptime
+	
+	ifconfig wlan0 | grep -q 192.168 && echo 0 > /sys/class/gpio/${GPIO_ERROR}/value
         ;;
   stop|restart|reload)
+	echo 1 > /sys/class/gpio/${GPIO_ERROR}/value
         ;;
   *)
         echo "Usage: $0 {start|stop|restart}"
