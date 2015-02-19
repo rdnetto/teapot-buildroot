@@ -16,6 +16,7 @@ case "$1" in
 		for i in $INPUTS; do
 			echo $i | sed 's/gpio//' > /sys/class/gpio/export
 			echo in > /sys/class/gpio/$i/direction
+			echo both > /sys/class/gpio/$i/edge
 		done
 
 		#HACK: needed because there are built-in pull-up resistors, so we have to pull the pin to ground
