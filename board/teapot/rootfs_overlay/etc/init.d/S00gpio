@@ -8,18 +8,18 @@
 case "$1" in
 	start)
 		for i in $OUTPUTS; do
-			echo $i > /sys/class/gpio/export
-			echo out > /sys/class/gpio/gpio$i/direction
-			echo 0 > /sys/class/gpio/gpio$i/value
+			#'low' is equiv. to setting direction=output, value=0 at once
+			echo $i | sed 's/gpio//' > /sys/class/gpio/export
+			echo low > /sys/class/gpio/$i/direction
 		done
 
 		for i in $INPUTS; do
-			echo $i > /sys/class/gpio/export
-			echo in > /sys/class/gpio/gpio$i/direction
-
-			#needed because there are built-in pull-up resistors, so we have to pull the pin to ground
-			echo 1 > /sys/class/gpio/gpio0/active_low
+			echo $i | sed 's/gpio//' > /sys/class/gpio/export
+			echo in > /sys/class/gpio/$i/direction
 		done
+
+		#HACK: needed because there are built-in pull-up resistors, so we have to pull the pin to ground
+		echo 1 > /sys/class/gpio/gpio0/active_low
 
 		echo 1 > /sys/class/gpio/${GPIO_ERROR}/value
 		;;

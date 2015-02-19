@@ -1,4 +1,7 @@
-INPUTS="0"
-OUTPUTS="1 4"
-GPIO_ERROR="gpio1"
+export GPIO_BUTTON="gpio0"
+export GPIO_ERROR="gpio1"
+export GPIO_ACTIVE="gpio4"
+
+export INPUTS="$GPIO_BUTTON"
+export OUTPUTS="$GPIO_ERROR $GPIO_ACTIVE"
 
