@@ -4,25 +4,25 @@
 #
 
 case "$1" in
-  start)
-        echo -n "Loading modules: "
-        while read mod; do
-            modprobe $mod
-        done </etc/modules
-        echo "OK"
-        ;;
-  stop)
-        echo -n "Unloading modules: "
-        while read mod; do
-            modprobe -r $mod
-        done </etc/modules
-        echo "OK"
-        ;;
-  restart|reload)
-        ;;
-  *)
-        echo "Usage: $0 {start|stop|restart}"
-        exit 1
+	start)
+		echo -n "Loading modules: "
+		while read mod; do
+			modprobe $mod
+		done </etc/modules
+		echo "OK"
+		;;
+	stop)
+		echo -n "Unloading modules: "
+		while read mod; do
+			modprobe -r $mod
+		done </etc/modules
+		echo "OK"
+		;;
+	restart|reload)
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart}"
+		exit 1
 esac
 
 exit $?
