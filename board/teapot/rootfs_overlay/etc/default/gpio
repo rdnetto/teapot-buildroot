@@ -5,3 +5,6 @@ export GPIO_ACTIVE="gpio4"
 export INPUTS="$GPIO_BUTTON"
 export OUTPUTS="$GPIO_ERROR $GPIO_ACTIVE"
 
+export NOTIFY_USER="reuben"
+export NOTIFY_HOST="phenom.local"
+

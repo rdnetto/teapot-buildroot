@@ -1,0 +1,5 @@
+config BR2_PACKAGE_TEAPOTD
+	bool "teapotd"
+	help
+	  UI daemon for performing key teapot functions (i.e. monitoring buttons and setting timers)
+
